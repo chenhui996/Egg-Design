@@ -1,25 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Button, { ButtonType, ButtonSize } from "./components/Button/button";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* 1. Normal */}
+      <Button> Hello </Button>
+      {/* 2. Disabled */}
+      <Button disabled> Hello </Button>
+      {/* 3. Enum Style */}
+      <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
+        Large Primary
+      </Button>
+      <Button btnType={ButtonType.Danger} size={ButtonSize.Small}>
+        Small Danger
+      </Button>
+      {/* 4. Normal Link */}
+      <Button
+        btnType={ButtonType.Link}
+        href="http://www.baidu.com"
+        size={ButtonSize.Small}
+      >
+        {" "}
+        Hello{" "}
+      </Button>
+      {/* 5. Disabled Link */}
+      <Button
+        btnType={ButtonType.Link}
+        href="http://www.baidu.com"
+        size={ButtonSize.Small}
+        disabled
+      >
+        {" "}
+        disabled Link{" "}
+      </Button>
+    </>
   );
 }
 
