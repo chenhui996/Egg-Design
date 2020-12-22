@@ -2,10 +2,10 @@ import React from "react";
 import classNames from "classnames";
 
 export enum AlertType {
-  Primary = "primary",
-  Default = "default",
-  Danger = "danger",
-  Link = "link",
+  Success = "success",
+  Info = "info",
+  Warning = "warning",
+  Error = "error",
 }
 
 interface BaseAlertProps {
@@ -25,24 +25,29 @@ const Alert: React.FunctionComponent<BaseAlertProps> = (props) => {
     description,
     alertType,
     closable,
-    active,
     onClose,
   } = props;
-  const classes = classNames("alert", className, {
-    [`alert-${alertType}`]: alertType,
+  const alertGlobalClass = "egg-alert";
+  const classes = classNames(alertGlobalClass, className, {
+    [`${alertGlobalClass}-${alertType}`]: alertType,
   });
+  const [closed, setClosed] = React.useState(true);
 
   return (
     <>
-      {active && (
+      {closed && (
         <div className={classes}>
           <div>
-            <div>{message}</div>
-            <div>{description}</div>
+            <div className={`${alertGlobalClass}-message`}>{message}</div>
+            <div className={`${alertGlobalClass}-description`}>
+              {description}
+            </div>
           </div>
           {closable && (
             <button
+              className={`${alertGlobalClass}-btn`}
               onClick={(e) => {
+                setClosed(false);
                 onClose && onClose(e);
               }}
             >
@@ -57,9 +62,8 @@ const Alert: React.FunctionComponent<BaseAlertProps> = (props) => {
 
 // normal
 Alert.defaultProps = {
-  alertType: AlertType.Default,
+  alertType: AlertType.Success,
   closable: false,
-  active: true,
 };
 
 export default Alert;

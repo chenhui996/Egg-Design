@@ -279,3 +279,15 @@ $progress-bg:                       $gray-200 !default;
 $progress-border-radius:            $border-radius !default;
 $progress-bar-color:                $white !default;
 $progress-bar-transition:           width .6s ease !default;
+
+// alert
+
+// alert-border
+$border-color-success: $success !default;
+$border-color-info: $info !default;
+$border-color-warning: $warning !default;
+$border-color-error: $danger !default;
+
+$alert-border-type: solid;
+
+$alert-border-width: $border-width;

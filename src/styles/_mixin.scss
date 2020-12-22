@@ -36,3 +36,14 @@
     border-color: $border;
   }
 }
+
+//alert
+@mixin alert-style(
+  $border-color,
+  $border-type,
+  $border-width,
+  $background-color: rgba($border-color, 0.1)
+) {
+  background-color: $background-color;
+  border:$border-width  $border-type rgba($border-color, 0.3);
+}
