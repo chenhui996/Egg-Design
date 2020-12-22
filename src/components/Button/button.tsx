@@ -22,10 +22,16 @@ interface BaseButtonProps {
   href?: string;
 }
 
-const Button: React.FunctionComponent<BaseButtonProps> = (props) => {
-  const { disabled, size, btnType, children, href } = props;
+type NativeButtonProps = BaseButtonProps &
+  React.ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps &
+  React.AnchorHTMLAttributes<HTMLElement>;
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
+
+const Button: React.FunctionComponent<ButtonProps> = (props) => {
+  const { disabled, className, size, btnType, children, href, ...restProps } = props;
   // btn, btn-lg, btn-primary
-  const classes = classNames("btn", {
+  const classes = classNames("btn", className, {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     disabled: btnType === ButtonType.Link && disabled,
@@ -34,29 +40,23 @@ const Button: React.FunctionComponent<BaseButtonProps> = (props) => {
   // main
   if (btnType === ButtonType.Link && href) {
     return (
-    <a
-        className={classes}
-        href={href}
-    >
+      <a className={classes} href={href} {...restProps}>
         {children}
-    </a>);
-  }
-  else{
+      </a>
+    );
+  } else {
     return (
-        <button
-            className={classes}
-            disabled={disabled}
-        >
-            {children}
-        </button>
-    )
+      <button className={classes} disabled={disabled} {...restProps}>
+        {children}
+      </button>
+    );
   }
 };
 
 // normal
 Button.defaultProps = {
-    disabled: false,
-    btnType: ButtonType.Default
-}
+  disabled: false,
+  btnType: ButtonType.Default,
+};
 
 export default Button;
