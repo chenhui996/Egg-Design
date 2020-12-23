@@ -8,9 +8,9 @@ export enum AlertType {
   Error = "error",
 }
 
-interface BaseAlertProps {
+export interface BaseAlertProps {
   className?: string;
-  message: string;
+  message?: string;
   description?: string;
   alertType?: AlertType;
   closable?: boolean;
@@ -64,6 +64,7 @@ const Alert: React.FunctionComponent<BaseAlertProps> = (props) => {
 Alert.defaultProps = {
   alertType: AlertType.Success,
   closable: false,
+  message: '请给message属性，并输入提示信息'
 };
 
 export default Alert;
