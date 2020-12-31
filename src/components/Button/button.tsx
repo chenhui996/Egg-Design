@@ -29,7 +29,15 @@ type AnchorButtonProps = BaseButtonProps &
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 
 const Button: React.FunctionComponent<ButtonProps> = (props) => {
-  const { disabled, className, size, btnType, children, href, ...restProps } = props;
+  const {
+    disabled,
+    className,
+    size,
+    btnType,
+    children,
+    href,
+    ...restProps
+  } = props;
   // btn, btn-lg, btn-primary
   const classes = classNames("btn", className, {
     [`btn-${btnType}`]: btnType,
