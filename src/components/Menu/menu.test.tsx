@@ -3,7 +3,6 @@ import {
   fireEvent,
   render,
   RenderResult,
-  cleanup,
   waitFor,
 } from "@testing-library/react";
 

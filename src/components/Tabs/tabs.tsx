@@ -1,52 +1,75 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
+import { TabItemProps } from "./tabItem";
 
-type SelectCallback = (selectIndex: string) => void;
+type SelectCallBack = (selectIndex: number) => void;
 
 export interface TabsProps {
-  defaultIndex?: string;
+  defaultIndex?: number;
   className?: string;
-  onSelect?: SelectCallback;
+  onSelect?: SelectCallBack;
+  type?: "line" | "card";
 }
-
-interface ITabsContext {
-  index: string;
-  onClickSelect?: SelectCallback;
-}
-
-export const TabsContext = createContext<ITabsContext>({ index: "0" });
 
 const Tabs: React.FunctionComponent<TabsProps> = (props) => {
-  const { className, defaultIndex, onSelect, children } = props;
-  // active
+  const { defaultIndex, className, onSelect, type, children } = props;
   const [currentActive, setCurrentActive] = useState(defaultIndex);
-  // classnames
   const tabsGlobalClass = "egg-tabs";
-  const classes = classNames(tabsGlobalClass, className);
-
-  const handleClick = (index: string) => {
-    setCurrentActive(index);
-    if (onSelect) {
-      onSelect(index);
+  const handleClick = (
+    e: React.MouseEvent,
+    index: number,
+    disabled: boolean | undefined
+  ) => {
+    if (!disabled) {
+      setCurrentActive(index);
+      if (onSelect) {
+        onSelect(index);
+      }
     }
   };
-
-  const passedContext: ITabsContext = {
-    index: currentActive ? currentActive : "0",
-    onClickSelect: handleClick,
+  const navClass = classNames(`${tabsGlobalClass}-nav`, {
+    "nav-line": type === "line",
+    "nav-card": type === "card",
+  });
+  const renderNavLink = () => {
+    return React.Children.map(children, (child, index) => {
+      const childElement = child as React.FunctionComponentElement<TabItemProps>;
+      const { label, disabled } = childElement.props;
+      const classes = classNames(`${tabsGlobalClass}-nav-item`, {
+        "is-active": currentActive === index,
+        "disabled": disabled,
+      });
+      return (
+        <li
+          className={classes}
+          key={`nav-item-${index}`}
+          onClick={(e) => {
+            handleClick(e, index, disabled);
+          }}
+        >
+          {label}
+        </li>
+      );
+    });
   };
-
+  const renderContext = () => {
+    return React.Children.map(children, (child, index) => {
+      if (index === currentActive) {
+        return child;
+      }
+    });
+  };
   return (
-    <div className={classes}>
-      <TabsContext.Provider value={passedContext}>
-        {children}
-      </TabsContext.Provider>
+    <div className={`${tabsGlobalClass} ${className}`}>
+      <ul className={navClass}>{renderNavLink()}</ul>
+      <div className={`${tabsGlobalClass}-content`}>{renderContext()}</div>
     </div>
   );
 };
 
 Tabs.defaultProps = {
-  defaultIndex: "0",
+  defaultIndex: 0,
+  type: "line",
 };
 
 export default Tabs;

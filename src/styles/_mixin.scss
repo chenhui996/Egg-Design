@@ -47,3 +47,8 @@
   background-color: $background-color;
   border:$border-width  $border-type rgba($border-color, 0.3);
 }
+
+@mixin border-top-radius($raduis){
+  border-top-left-radius: $raduis;
+  border-top-right-radius: $raduis;
+}

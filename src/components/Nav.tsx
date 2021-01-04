@@ -11,6 +11,8 @@ const Nav = () => {
         <span> | </span>
         <Link to="/menu">Menu</Link>
         <span> | </span>
+        <Link to="/tabs">Tabs</Link>
+        <span> | </span>
     </nav>
 }
 
