@@ -7,6 +7,8 @@ import ButtonShow from "./components/Button/ButtonShow";
 import AlertShow from "./components/Alert/AlertShow";
 import MenuShow from "./components/Menu/MenuShow";
 import TabsShow from "./components/Tabs/TabsShow";
+import IconShow from './components/Icon/IconShow';
+import TransitionShow from './components/Transition/TransitionShow';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/alert" exact component={AlertShow} />
           <Route path="/menu" exact component={MenuShow} />
           <Route path="/tabs" exact component={TabsShow} />
+          <Route path="/icon" exact component={IconShow} />
+          <Route path="/transition" exact component={TransitionShow} />
           <Route component={View404} />
         </Switch>
       {/* </BrowserRouter> */}

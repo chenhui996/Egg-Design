@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Button, { ButtonType } from "../Button/button";
+import Button from "../Button/button";
 import Alert, { AlertType } from "./alert";
+import Transition from "../Transition/transition";
 
 function ButtonShow() {
   const [alertShow, setAlertShow] = useState(false);
@@ -50,7 +51,12 @@ function ButtonShow() {
       <br />
       --------------------------------------------------------------------------
       <div>
-        {alertShow && (
+        <Transition
+          in={alertShow}
+          timeout={300}
+          animation="zoom-in-top"
+          wrapper
+        >
           <Alert
             message="click show"
             description="click show description"
@@ -60,9 +66,9 @@ function ButtonShow() {
               setAlertShow(false);
             }}
           />
-        )}
+        </Transition>
         <Button
-          btnType={ButtonType.Primary}
+          btnType="primary"
           onClick={() => {
             setAlertShow(true);
           }}

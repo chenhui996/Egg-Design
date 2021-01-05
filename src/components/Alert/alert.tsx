@@ -1,5 +1,10 @@
 import React from "react";
 import classNames from "classnames";
+import Icon from "../Icon/icon";
+import Transition from "../Transition/transition";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+library.add(fas);
 
 export enum AlertType {
   Success = "success",
@@ -35,27 +40,27 @@ const Alert: React.FunctionComponent<BaseAlertProps> = (props) => {
 
   return (
     <>
-      {closed && (
-        <div className={classes}>
-          <div>
-            <div className={`${alertGlobalClass}-message`}>{message}</div>
-            <div className={`${alertGlobalClass}-description`}>
-              {description}
+      <Transition wrapper in={closed} timeout={300} animation="zoom-in-top">
+          <div className={classes}>
+            <div>
+              <div className={`${alertGlobalClass}-message`}>{message}</div>
+              <div className={`${alertGlobalClass}-description`}>
+                {description}
+              </div>
             </div>
+            {closable && (
+              <button
+                className={`${alertGlobalClass}-btn`}
+                onClick={(e) => {
+                  setClosed(false);
+                  onClose && onClose(e);
+                }}
+              >
+                <Icon icon="times" theme="danger" size="1x" />
+              </button>
+            )}
           </div>
-          {closable && (
-            <button
-              className={`${alertGlobalClass}-btn`}
-              onClick={(e) => {
-                setClosed(false);
-                onClose && onClose(e);
-              }}
-            >
-              关闭
-            </button>
-          )}
-        </div>
-      )}
+      </Transition>
     </>
   );
 };
@@ -64,7 +69,7 @@ const Alert: React.FunctionComponent<BaseAlertProps> = (props) => {
 Alert.defaultProps = {
   alertType: AlertType.Success,
   closable: false,
-  message: '请给message属性，并输入提示信息'
+  message: "请给message属性，并输入提示信息",
 };
 
 export default Alert;

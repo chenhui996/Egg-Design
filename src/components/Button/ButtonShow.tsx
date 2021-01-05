@@ -1,5 +1,5 @@
 import React from "react";
-import Button, { ButtonType, ButtonSize } from "./button";
+import Button from "./button";
 
 function ButtonShow() {
   return (
@@ -13,17 +13,17 @@ function ButtonShow() {
       {/* 2. Disabled */}
       <Button disabled> Hello </Button>
       {/* 3. Enum Style */}
-      <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>
+      <Button btnType="primary" size="lg">
         Large Primary
       </Button>
-      <Button btnType={ButtonType.Danger} size={ButtonSize.Small}>
+      <Button btnType="danger" size="sm">
         Small Danger
       </Button>
       {/* 4. Normal Link */}
       <Button
-        btnType={ButtonType.Link}
+        btnType="link"
         href="http://www.baidu.com"
-        size={ButtonSize.Small}
+        size="sm"
         target="_blank"
       >
         {" "}
@@ -31,9 +31,9 @@ function ButtonShow() {
       </Button>
       {/* 5. Disabled Link */}
       <Button
-        btnType={ButtonType.Link}
+        btnType="link"
         href="http://www.baidu.com"
-        size={ButtonSize.Small}
+        size="sm"
         disabled
       >
         {" "}

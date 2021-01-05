@@ -13,6 +13,10 @@ const Nav = () => {
         <span> | </span>
         <Link to="/tabs">Tabs</Link>
         <span> | </span>
+        <Link to="/icon">Icon</Link>
+        <span> | </span>
+        <Link to="/transition">Transition</Link>
+        <span> | </span>
     </nav>
 }
 
