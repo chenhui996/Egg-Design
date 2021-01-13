@@ -1,0 +1,180 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import { AutoComplete } from "./autoComplete";
+import {
+  handleFetchSynch,
+  handleFetchAsync,
+  renderOptionSynch,
+  renderOptionAsync,
+  handleFetchNormal,
+} from "./dataDeal";
+
+<Meta title="组件总览/AutoComplete" component={AutoComplete} />
+
+# AutoComplete Component
+
+自动补全。
+
+## AutoComplete header
+
+```js
+import { AutoComplete } from "egg-design";
+```
+
+## 默认 AutoComplete（同步任务）
+
+<Story name="AutoComplete">
+  <AutoComplete
+    fetchSuggestions={handleFetchNormal}
+    onSelect={action("select")}
+    placeholder="输入湖人队名称"
+  />
+</Story>
+
+```ts
+// 数据源
+const lakers: string[] = [
+  "bradley",
+  "pope",
+  "caruso",
+  "cook",
+  "cousins",
+  "james",
+  "AD",
+  "green",
+  "howard",
+  "kuzma",
+  "McGee",
+  "rando",
+];
+
+// normal
+export const handleFetchNormal = (query: string) => {
+  return lakers
+    .filter((player) => player.includes(query))
+    .map((name) => ({ value: name }));
+};
+
+<AutoComplete
+  fetchSuggestions={handleFetchNormal}
+  onSelect={action("select")}
+  placeholder="输入湖人队名称"
+/>;
+```
+
+## 自定义下拉选项（同步任务）
+
+<Story name="自定义下拉选项">
+  <AutoComplete
+    fetchSuggestions={handleFetchSynch}
+    onSelect={action("select")}
+    placeholder="输入湖人队名称"
+    renderOption={renderOptionSynch}
+  />
+</Story>
+
+```ts
+import { DataSourceType } from "./autoComplete";
+
+// 数据源
+interface LakerPlayerProps {
+  value: string;
+  number: number;
+}
+
+const lakersWithNumber = [
+  { value: "bradley", number: 11 },
+  { value: "pope", number: 1 },
+  { value: "caruso", number: 4 },
+  { value: "cook", number: 2 },
+  { value: "cousins", number: 15 },
+  { value: "james", number: 23 },
+  { value: "AD", number: 3 },
+  { value: "green", number: 14 },
+  { value: "howard", number: 39 },
+  { value: "kuzma", number: 0 },
+];
+
+// synch
+export const renderOptionSynch = (item: DataSourceType<LakerPlayerProps>) => {
+  return (
+    <>
+      <p>
+        <strong>Name: {item.value}</strong>
+      </p>
+      <p>number: {item.number}</p>
+    </>
+  );
+};
+
+export const handleFetchSynch = (query: string) => {
+  return lakersWithNumber.filter((player) => player.value.includes(query));
+};
+
+<AutoComplete
+  fetchSuggestions={handleFetchSynch}
+  onSelect={action("select")}
+  placeholder="输入湖人队名称"
+  renderOption={renderOptionSynch}
+/>;
+```
+
+## 异步 AutoComplete（异步任务）
+
+<Story name="异步请求Github用户名">
+  <AutoComplete
+    fetchSuggestions={handleFetchAsync}
+    onSelect={action("select")}
+    placeholder="输入Github用户名"
+    renderOption={renderOptionAsync}
+  />
+</Story>
+
+```ts
+import { DataSourceType } from "./autoComplete";
+
+// 数据源
+interface GithubUserProps {
+  login: string;
+  url: string;
+  avatar_url: string;
+}
+
+// async
+export const renderOptionAsync = (item: DataSourceType<GithubUserProps>) => {
+  return (
+    <>
+      <p>
+        <strong>login: {item.login}</strong>
+      </p>
+    </>
+  );
+};
+
+export const handleFetchAsync = (query: string) => {
+  return fetch(`https://api.github.com/search/users?q=${query}`)
+    .then((res) => res.json())
+    .then(({ items }) => {
+      // console.log(items);
+      const formatItems = items
+        .slice(0, 10)
+        .map((item: any) => ({ value: item.login, ...item }));
+      return formatItems;
+    });
+};
+
+<AutoComplete
+  fetchSuggestions={handleFetchAsync}
+  onSelect={action("select")}
+  placeholder="输入Github用户名"
+  renderOption={renderOptionAsync}
+/>;
+```
+
+## API
+
+通过设置 AutoComplete 的属性来产生不同的输入框样式，推荐顺序为：fetchSuggestions -> onSelect -> renderOption。
+
+**AutoComplete 的属性说明如下：**
+
+<ArgsTable of={AutoComplete} />

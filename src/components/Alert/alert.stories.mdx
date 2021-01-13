@@ -1,0 +1,68 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import Alert, { AlertType } from "./alert";
+
+<Meta title="组件总览/Alert 提示框" component={Alert} />
+
+# Alert Component
+
+警告提示，展现需要关注的信息。
+
+## Alert header
+
+```js
+import { Alert } from "egg-design";
+```
+
+## 默认 Alert
+
+<Canvas>
+  <Story name="Alert">
+    <Alert />
+    <Alert title="title" />
+  </Story>
+</Canvas>
+
+## 不同类型的 Alert
+
+<Canvas>
+  <Story name="不同类型的 Alert">
+    <Alert title="Success" description="message and description description" />
+    <Alert
+      title="Default"
+      description="message and description description"
+      type="default"
+    />
+    <Alert
+      title="Warning"
+      description="message and description description"
+      type="warning"
+    />
+    <Alert
+      title="Error"
+      description="message and description description"
+      type="danger"
+    />
+  </Story>
+</Canvas>
+
+## 含有关闭按钮的 Alert
+
+<Canvas>
+  <Story name="含有关闭按钮的 Alert">
+    <Alert
+      title="click show"
+      description="click show description"
+      closable
+      onClose={action("onClose")}
+    />
+  </Story>
+</Canvas>
+
+## API
+
+通过设置 Alert 的属性来产生不同的按钮样式，推荐顺序为: message -> description -> type -> disabled。
+
+**Alert 的属性说明如下：**
+
+<ArgsTable of={Alert} />

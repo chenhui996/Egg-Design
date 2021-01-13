@@ -87,6 +87,13 @@ $body-text-align:           null !default;
 // Spacing
 $spacer: 1rem !default;
 
+$headings-margin-bottom:      $spacer / 2 !default;
+$headings-font-family:        null !default;
+$headings-font-style:         null !default;
+$headings-font-weight:        500 !default;
+$headings-line-height:        1.2 !default;
+$headings-color:              null !default;
+
 // Paragraphs
 
 $paragraph-margin-bottom:   1rem !default;
@@ -280,30 +287,31 @@ $progress-border-radius:            $border-radius !default;
 $progress-bar-color:                $white !default;
 $progress-bar-transition:           width .6s ease !default;
 
-// alert
+// Alerts
+//
+// Define alert colors, border radius, and padding.
 
-// alert-border
-$border-color-success: $success !default;
-$border-color-info: $info !default;
-$border-color-warning: $warning !default;
-$border-color-error: $danger !default;
-
-$alert-border-type: solid;
-
-$alert-border-width: $border-width;
+$alert-padding-y:                   .75rem !default;
+$alert-padding-x:                   1.25rem !default;
+$alert-margin-bottom:               1rem !default;
+$alert-border-radius:               $border-radius !default;
+$alert-title-font-weight:           $font-weight-bold !default;
+$alert-border-width:                $border-width !default;
+$alert-description-font-size:       $font-size-sm !default;
+$alert-description-top-margin:      .3rem !default;
 
 // Navs
 
-$nav-link-padding-y: .5rem !default;
-$nav-link-padding-x: 1rem !default;
-$nav-link-disabled-color: $gray-600 !default;
+$nav-link-padding-y:                .5rem !default;
+$nav-link-padding-x:                1rem !default;
+$nav-link-disabled-color:           $gray-600 !default;
 
-$nav-tabs-border-color: $gray-300 !default;
-$nav-tabs-border-width: $border-width !default;
-$nav-tabs-border-radius: $border-radius !default;
-$nav-tabs-link-hover-border-color: $gray-200 $gray-200 $nav-tabs-border-color !default;
-$nav-tabs-link-hover-color: $primary !default;
-$nav-tabs-link-active-color: $primary !default;
-$nav-tabs-link-active-bg: $body-bg !default;
+$nav-tabs-border-color:             $gray-300 !default;
+$nav-tabs-border-width:             $border-width !default;
+$nav-tabs-border-radius:            $border-radius !default;
+$nav-tabs-link-hover-border-color:  $gray-200 $gray-200 $nav-tabs-border-color !default;
+$nav-tabs-link-hover-color:         $primary !default;
+$nav-tabs-link-active-color:        $primary !default;
+$nav-tabs-link-active-bg:           $body-bg !default;
 $nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
-$nav-tabs-content-margin: 1rem !default;
+$nav-tabs-content-margin:           1rem !default;

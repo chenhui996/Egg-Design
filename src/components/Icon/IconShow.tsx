@@ -11,7 +11,7 @@ const IconShow = () => {
       <br />
       --------------------------------------------------------------------------
       <h1>Icon Show</h1>
-      <Icon icon="coffee" theme="danger" size="10x" />
+      <Icon icon="coffee" theme="warning" size="10x" />
     </>
   );
 };

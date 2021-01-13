@@ -17,7 +17,7 @@ const TransitionShow = () => {
       >
         Toggle
       </Button>
-      <Transition in={show} timeout={300} animation="zoom-in-left" wrapper>
+      <Transition in={show} timeout={300} animation="zoom-in-top" wrapper>
         <div>
           <p>
             Edit <code>src/App.tsx</code> and save to reload.

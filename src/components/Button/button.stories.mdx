@@ -1,0 +1,54 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import Button from "./button.tsx";
+
+<Meta title="组件总览/Button 按钮" component={Button} />
+
+# Button Component
+
+按钮用于开始一个即时操作。
+
+## Button header
+
+```js
+import { Button } from "egg-design";
+```
+
+## 默认 Button
+
+<Canvas>
+  <Story name="Button">
+    <Button onClick={action("clicked")}>default Button</Button>
+  </Story>
+</Canvas>
+
+## 不同尺寸的 Button
+
+<Canvas>
+  <Story name="不同尺寸的Button">
+    <Button size="lg">large button</Button>
+    <Button size="sm">small button</Button>
+  </Story>
+</Canvas>
+
+## 不同类型的 Button
+
+<Canvas>
+  <Story name="不同类型的Button">
+    <Button btnType="primary">primary button</Button>
+    <Button btnType="danger">danger button</Button>
+    <Button btnType="default">default button</Button>
+    <Button btnType="default" disabled>default button</Button>
+    <Button btnType="link" href="https://google.com">
+      link button
+    </Button>
+  </Story>
+</Canvas>
+
+## API
+
+通过设置 Button 的属性来产生不同的按钮样式，推荐顺序为：type ->  size ->  disabled。
+
+**按钮的属性说明如下：**
+
+<ArgsTable of={Button} />

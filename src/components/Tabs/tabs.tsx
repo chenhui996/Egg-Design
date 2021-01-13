@@ -5,13 +5,17 @@ import { TabItemProps } from "./tabItem";
 type SelectCallBack = (selectIndex: number) => void;
 
 export interface TabsProps {
+  /** 设置默认激活的 TabsItem   */
   defaultIndex?: number;
+  /** 自定义class名称 */
   className?: string;
+  /** 被选中时调用 */
   onSelect?: SelectCallBack;
+  /** 设置 Tabs 的样式类型 */
   type?: "line" | "card";
 }
 
-const Tabs: React.FunctionComponent<TabsProps> = (props) => {
+export const Tabs: React.FunctionComponent<TabsProps> = (props) => {
   const { defaultIndex, className, onSelect, type, children } = props;
   const [currentActive, setCurrentActive] = useState(defaultIndex);
   const tabsGlobalClass = "egg-tabs";

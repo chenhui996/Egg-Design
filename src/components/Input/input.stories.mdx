@@ -1,0 +1,80 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import { Input } from "./input.tsx";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+library.add(fas);
+import { ControlledInput } from "./ControlledInput";
+
+<Meta title="组件总览/Input 输入框" component={Input} />
+
+# Input Component
+
+通过鼠标或键盘输入内容，是最基础的表单域的包装。
+
+## Input header
+
+```js
+import { Input } from "egg-design";
+```
+
+
+## 默认 Input
+
+<Canvas>
+  <Story name="Input">
+    <Input placeholder="default input" />
+    <Input disabled placeholder="disabled input" />
+    <ControlledInput />s
+  </Story>
+</Canvas>
+
+## 受控 Input
+
+```js
+import { ControlledInput } from "./ControlledInput";
+```
+
+<Canvas>
+  <Story name="受控 Input">
+    <ControlledInput />
+  </Story>
+</Canvas>
+
+## 不同尺寸的 Input
+
+<Canvas>
+  <Story name="不同尺寸的 Input">
+    <Input size="lg" placeholder="big input" />
+    <Input size="sm" placeholder="small input" />
+  </Story>
+</Canvas>
+
+## 带图标的 Input
+
+<Canvas>
+  <Story name="带图标的 Input Input">
+    <Input size="lg" icon="coffee" placeholder="icon input" />
+  </Story>
+</Canvas>
+
+## 前置/后置标签 Input
+
+<Canvas>
+  <Story name="前置/后置标签 Input">
+    <Input
+      size="lg"
+      prepend="http://"
+      append=".com"
+      placeholder="prepend and append input"
+    />
+  </Story>
+</Canvas>
+
+## API
+
+通过设置 Input 的属性来产生不同的输入框样式，推荐顺序为：size -> icon -> prepend -> append -> disabled。
+
+**输入框的属性说明如下：**
+
+<ArgsTable of={Input} />

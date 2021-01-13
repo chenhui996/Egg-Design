@@ -61,7 +61,6 @@ function ButtonShow() {
             message="click show"
             description="click show description"
             closable
-            active={alertShow}
             onClose={() => {
               setAlertShow(false);
             }}

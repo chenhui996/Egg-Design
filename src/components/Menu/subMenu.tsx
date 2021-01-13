@@ -6,12 +6,15 @@ import Icon from "../Icon/icon";
 import Transition from "../Transition/transition";
 
 export interface SubMenuProps {
+  /** item 的唯一标志 */
   index?: string;
+  /** 分组标题 */
   title: string;
+  /** 自定义class名称 */
   className?: string;
 }
 
-const SubMenu: React.FC<SubMenuProps> = (props) => {
+export const SubMenu: React.FC<SubMenuProps> = (props) => {
   const { index, title, children, className } = props;
   const context = useContext(MenuContext);
   const openedSubMenus = context.defaultOpenSubMenus as Array<string>;
@@ -76,9 +79,11 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
       }
     });
     return (
-      <Transition wrapper in={menuOpen} timeout={300} animation="zoom-in-top">
-        <ul className={subMenuClasses}>{childrenComponent}</ul>
-      </Transition>
+      <div className="submenu-item-box">
+        <Transition wrapper in={menuOpen} timeout={300} animation="zoom-in-top">
+          <ul className={subMenuClasses}>{childrenComponent}</ul>
+        </Transition>
+      </div>
     );
   };
   return (

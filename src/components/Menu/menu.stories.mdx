@@ -1,0 +1,90 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import Menu from "./menu";
+import MenuItem from "./menuItem";
+import SubMenu from "./subMenu";
+
+<Meta title="组件总览/Menu 导航菜单" component={Menu} />
+
+# Menu Component
+
+为页面和功能提供导航的菜单列表。
+
+## Menu header
+
+```js
+import { Menu, MenuItem, SubMenu } from "egg-design";
+```
+
+## 默认 Menu
+
+<Canvas>
+  <Story name="Menu">
+    <Menu defaultIndex={"0"} onSelect={action("select")}>
+      <MenuItem>cool link0</MenuItem>
+      <MenuItem>cool link1</MenuItem>
+      <MenuItem>cool link2</MenuItem>
+      <MenuItem disabled>cool link3</MenuItem>
+      <SubMenu title="dropdown">
+        <MenuItem>submenu 01</MenuItem>
+        <MenuItem>submenu 02</MenuItem>
+      </SubMenu>
+    </Menu>
+  </Story>
+</Canvas>
+
+## 纵向 Menu
+
+<Canvas>
+  <Story name="垂直 Menu">
+    <Menu defaultIndex={"0"} onSelect={action("select")} mode={"vertical"}>
+      <MenuItem>cool link0</MenuItem>
+      <MenuItem>cool link1</MenuItem>
+      <SubMenu title="dropdown">
+        <MenuItem>submenu 01</MenuItem>
+        <MenuItem>submenu 02</MenuItem>
+      </SubMenu>
+      <MenuItem>cool link2</MenuItem>
+      <MenuItem disabled>cool link3</MenuItem>
+    </Menu>
+  </Story>
+</Canvas>
+
+## 默认展开纵向 Menu
+
+<Canvas>
+  <Story name="默认展开纵向 Menu">
+    <Menu defaultIndex={"0"} onSelect={action("select")} mode={"vertical"} defaultOpenSubMenus={['2']}>
+      <MenuItem>cool link0</MenuItem>
+      <MenuItem>cool link1</MenuItem>
+      <SubMenu title="dropdown">
+        <MenuItem>submenu 01</MenuItem>
+        <MenuItem>submenu 02</MenuItem>
+      </SubMenu>
+      <MenuItem>cool link2</MenuItem>
+      <MenuItem disabled>cool link3</MenuItem>
+    </Menu>
+  </Story>
+</Canvas>
+
+## API
+
+通过设置 Menu 、MenuItem 和 SubMenu 的属性来产生不同的按钮样式，推荐顺序为:
+
+Menu: defaultIndex -> onSelect -> mode。
+
+**Menu 的属性说明如下：**
+
+<ArgsTable of={Menu} />
+
+MenuItem: disabled。
+
+**MenuItem 的属性说明如下：**
+
+<ArgsTable of={MenuItem} />
+
+SubMenu: title。
+
+**SubMenu 的属性说明如下：**
+
+<ArgsTable of={SubMenu} />

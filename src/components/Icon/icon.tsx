@@ -5,10 +5,11 @@ import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontaw
 export type ThemeProps = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark';
 
 export interface IconProps extends FontAwesomeIconProps {
+    /** 自定义 Icon 组件的类型*/
     theme ?: ThemeProps;
 }
 
-const Icon: React.FunctionComponent<IconProps> = (props) => {
+export const Icon: React.FunctionComponent<IconProps> = (props) => {
     // icon-primary
     const { className, theme, ...restProps } = props;
     const iconGlobalClass = "egg-icon"

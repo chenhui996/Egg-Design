@@ -1,18 +1,20 @@
 import React from "react";
 
 export interface TabItemProps {
-    label: string | React.ReactElement;
-    disabled?: boolean;
+  /** 选项卡头显示文字 */
+  label: string | React.ReactElement;
+  /** 是否禁用 */
+  disabled?: boolean;
 }
 
-const TabItem: React.FunctionComponent<TabItemProps> = (props) => {
+export const TabItem: React.FunctionComponent<TabItemProps> = (props) => {
   const { children } = props;
   // context
-  return (
-    <div className="viking-tab-panel">
-      {children}
-    </div>
-  );
+  return <div className="viking-tab-panel">{children}</div>;
 };
+
+TabItem.defaultProps={
+  disabled:false
+}
 
 export default TabItem;

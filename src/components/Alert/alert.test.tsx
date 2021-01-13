@@ -1,71 +1,41 @@
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-import Alert, { AlertType, BaseAlertProps } from "./alert";
+import React from 'react'
+import { config } from 'react-transition-group'
+import { render, fireEvent } from '@testing-library/react'
 
-const testProps: BaseAlertProps = {
-  alertType: AlertType.Info,
-  className: "klass",
-  message: "testProps",
-  description: "testProps description",
-  closable: true,
-  onClose: jest.fn(),
-};
+import Alert, { AlertProps } from './alert'
+config.disabled = true
 
-// 分类
-describe("test Alert component", () => {
-  // it or test effect same
-  it("should render the current default alert", () => {
-    const wrapper = render(<Alert></Alert>);
-    // box
-    const elementBox = wrapper.container.querySelector(
-      ".egg-alert"
-    ) as HTMLBaseElement;
-    expect(elementBox).toBeInTheDocument();
-    expect(elementBox.tagName).toEqual("DIV");
-    expect(elementBox).toHaveClass("egg-alert egg-alert-success");
-    expect(elementBox).not.toHaveAttribute("closable");
-    // message
-    const elementMessage = wrapper.container.querySelector(
-      ".egg-alert-message"
-    ) as HTMLBaseElement;
-    expect(elementMessage).toBeInTheDocument();
-    expect(elementMessage.tagName).toEqual("DIV");
-    expect(elementMessage).toHaveTextContent("请给message属性，并输入提示信息");
-    // description
-    const elementDescription = wrapper.container.querySelector(
-      ".egg-alert-description"
-    ) as HTMLBaseElement;
-    expect(elementDescription).toBeInTheDocument();
-    expect(elementDescription.tagName).toEqual("DIV");
-    expect(elementDescription).not.toHaveTextContent(" "); // 当dom不含有文本内容, 默认含有空格
-    // button
-  });
-  it("should render the currect component based on different props", () => {
-    const wrapper = render(<Alert {...testProps}></Alert>);
-    // box
-    const elementBox = wrapper.container.querySelector(
-      ".egg-alert"
-    ) as HTMLBaseElement;
-    expect(elementBox).toBeInTheDocument();
-    expect(elementBox.tagName).toEqual("DIV");
-    expect(elementBox).toHaveClass("egg-alert egg-alert-info");
+jest.mock('../Icon/icon', () => {
+  return (props: any) => {
+    return <span>{props.icon}</span>
+  }
+})
 
-    // message
-    const elementMessage = wrapper.getByText("testProps") as HTMLButtonElement;
-    expect(elementMessage).toBeInTheDocument();
-    expect(elementMessage).toHaveClass("egg-alert-message");
-    // description
-    const elementDescription = wrapper.getByText(
-      "testProps description"
-    ) as HTMLButtonElement;
-    expect(elementDescription).toBeInTheDocument();
-    expect(elementDescription).toHaveClass("egg-alert-description");
-    // button
-    const elementBtn = wrapper.getByText("关闭") as HTMLButtonElement;
-    expect(elementBtn).toBeInTheDocument();
-    expect(elementBtn).toHaveClass("egg-alert-btn");
-    // onClick
-    fireEvent.click(elementBtn);
-    expect(testProps.onClose).toHaveBeenCalled();
-  });
-});
+const testProps: AlertProps = {
+  title: 'title',
+  onClose: jest.fn()
+}
+
+const typeProps: AlertProps = {
+  ...testProps,
+  type: 'success',
+  description: 'hello',
+  closable: false
+}
+describe('test Alert Component', () => {
+  it('should render the correct default Alert', () => {
+    const { getByText, container, queryByText } = render(<Alert {...testProps}/>)
+    expect(queryByText('title')).toBeInTheDocument()
+    expect(container.querySelector('.egg-alert')).toHaveClass('egg-alert-default')
+    fireEvent.click(getByText('times'))
+    expect(testProps.onClose).toHaveBeenCalled()
+    expect(queryByText('title')).not.toBeInTheDocument()
+  })
+  it('should render the correct Alert based on different type and description', () => {
+    const { container, queryByText } = render(<Alert {...typeProps}/>)
+    expect(queryByText('title')).toHaveClass('bold-title')
+    expect(container.querySelector('.egg-alert')).toHaveClass('egg-alert-success')
+    expect(queryByText('hello')).toBeInTheDocument()
+    expect(queryByText('times')).not.toBeInTheDocument()
+  })
+})

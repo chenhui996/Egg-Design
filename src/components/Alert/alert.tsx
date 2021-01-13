@@ -1,75 +1,68 @@
-import React from "react";
-import classNames from "classnames";
-import Icon from "../Icon/icon";
-import Transition from "../Transition/transition";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-library.add(fas);
+import React, { FC, useState } from 'react'
+import classNames from 'classnames'
+import Icon from '../Icon/icon'
+import Transition from '../Transition/transition'
+export type AlertType = 'success' | 'default' | 'danger' | 'warning'
 
-export enum AlertType {
-  Success = "success",
-  Info = "info",
-  Warning = "warning",
-  Error = "error",
-}
-
-export interface BaseAlertProps {
-  className?: string;
-  message?: string;
+export interface AlertProps {
+  /**标题 */
+  title: string;
+  /**描述 */
   description?: string;
-  alertType?: AlertType;
+  /**类型 四种可选 针对四种不同的场景 */
+  type?: AlertType;
+  /**关闭alert时触发的事件 */
+  onClose?: () => void;
+  /**是否显示关闭图标*/
   closable?: boolean;
-  active?: boolean;
-  onClose?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Alert: React.FunctionComponent<BaseAlertProps> = (props) => {
+/** 
+ * 用于页面中展示重要的提示信息。 点击右侧的叉提示自动消失
+ * ### 引用方法
+ * 
+ * ~~~js
+ * import { Alert } from 'eggship'
+ * ~~~
+*/
+export const Alert: FC<AlertProps> = (props) => {
+  const [ hide, setHide ] = useState(false)
   const {
-    className,
-    message,
+    title,
     description,
-    alertType,
-    closable,
+    type,
     onClose,
-  } = props;
-  const alertGlobalClass = "egg-alert";
-  const classes = classNames(alertGlobalClass, className, {
-    [`${alertGlobalClass}-${alertType}`]: alertType,
-  });
-  const [closed, setClosed] = React.useState(true);
-
+    closable
+  } = props
+  const classes = classNames('egg-alert', {
+    [`egg-alert-${type}`]: type,
+  })
+  const titleClass = classNames('egg-alert-title', {
+    'bold-title': description
+  })
+  const handleClose = (e: React.MouseEvent) => {
+    if (onClose) {
+      onClose()
+    }
+    setHide(true)
+  }
   return (
-    <>
-      <Transition wrapper in={closed} timeout={300} animation="zoom-in-top">
-          <div className={classes}>
-            <div>
-              <div className={`${alertGlobalClass}-message`}>{message}</div>
-              <div className={`${alertGlobalClass}-description`}>
-                {description}
-              </div>
-            </div>
-            {closable && (
-              <button
-                className={`${alertGlobalClass}-btn`}
-                onClick={(e) => {
-                  setClosed(false);
-                  onClose && onClose(e);
-                }}
-              >
-                <Icon icon="times" theme="danger" size="1x" />
-              </button>
-            )}
-          </div>
-      </Transition>
-    </>
-  );
-};
+    <Transition
+      in={!hide}
+      timeout={300}
+      animation="zoom-in-top"
+    >
+      <div className={classes}>
+        <span className={titleClass}>{title}</span>
+        {description && <p className="egg-alert-desc">{description}</p>}
+        {closable && <span className="egg-alert-close" onClick={handleClose}><Icon icon="times"/></span>}
+      </div>
+    </Transition>
+  )
+}
 
-// normal
 Alert.defaultProps = {
-  alertType: AlertType.Success,
-  closable: false,
-  message: "请给message属性，并输入提示信息",
-};
-
+  type: 'default',
+  closable: true,
+}
 export default Alert;

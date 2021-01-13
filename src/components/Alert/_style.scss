@@ -1,66 +1,37 @@
+.storybook-demo .egg-alert{
+  margin: 16px 0;
+}
+$alert-colors: 
+(
+  "default":    $primary,
+  "success":    $success,
+  "warning":    $warning,
+  "danger":     $danger,
+);
 .egg-alert {
-  box-sizing: border-box;
-  margin: 0;
-  color: rgba(0, 0, 0, 0.85);
-  font-size: $font-size-base;
-  line-height: $line-height-base;
-  border-radius: $border-radius-sm;
-  list-style: none;
-  align-items: center;
-  padding: 8px 15px;
   position: relative;
-  display: flex;
-  justify-content: space-between;
+  padding: $alert-padding-y $alert-padding-x;
+  margin-bottom: $alert-margin-bottom;
+  border: $alert-border-width solid transparent;
+  border-radius: $alert-border-radius;
+  .egg-alert-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: $alert-padding-y $alert-padding-x;
+    color: inherit;
+    cursor: pointer;
+  }
+  .bold-title {
+    font-weight: $font-weight-bold;
+  }
+  .egg-alert-desc {
+    font-size: $alert-description-font-size;
+    margin: $alert-description-top-margin 0 0;
+  }
 }
-.egg-alert-btn {
-  margin-left: 8px;
-  padding: 0;
-  overflow: hidden;
-  font-size: $font-size-sm;
-  line-height: $line-height-sm;
-  background-color: transparent;
-  border: none;
-  outline: none;
-}
-
-.egg-alert-message {
-  display: block;
-  margin-bottom: 4px;
-  color: rgba(0, 0, 0, 0.85);
-  font-size: $font-size-lg;
-}
-
-.egg-alert-description{
-    display: block;
-    font-size: $font-size-base;
-    line-height: $line-height-base;
-}
-
-.egg-alert-success {
-  @include alert-style(
-    $border-color-success,
-    $alert-border-type,
-    $alert-border-width
-  );
-}
-.egg-alert-info {
-  @include alert-style(
-    $border-color-info,
-    $alert-border-type,
-    $alert-border-width
-  );
-}
-.egg-alert-warning {
-  @include alert-style(
-    $border-color-warning,
-    $alert-border-type,
-    $alert-border-width
-  );
-}
-.egg-alert-error {
-  @include alert-style(
-    $border-color-error,
-    $alert-border-type,
-    $alert-border-width
-  );
+@each $color, $value in $alert-colors {
+  .egg-alert-#{$color} {
+    @include alert-style($value, darken($value, 5%), $white);
+  }
 }

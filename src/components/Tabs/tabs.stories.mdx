@@ -1,0 +1,64 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import Tabs from "./tabs";
+import TabItem from "./tabItem";
+
+<Meta title="组件总览/Tabs 标签页" component={Tabs} />
+
+# Tabs Component
+
+选项卡切换组件。
+
+## Tabs header
+
+```js
+import { Tabs, TabItem } from "egg-design";
+```
+
+## 默认 Tabs
+
+<Canvas>
+  <Story name="Tabs">
+    <Tabs>
+      <TabItem label="tab1">Content of Tab Pane 1</TabItem>
+      <TabItem label="tab2" disabled>
+        Content of Tab Pane 2
+      </TabItem>
+      <TabItem label="tab3">Content of Tab Pane 3</TabItem>
+    </Tabs>
+  </Story>
+</Canvas>
+
+## 卡片式 Tabs
+
+<Canvas>
+  <Story name="卡片式 Tabs">
+    <Tabs type="card" onSelect={action("select")}>
+      <TabItem label="tab1">
+        Content of Tab Pane 1
+      </TabItem>
+      <TabItem label="tab2" disabled>
+        Content of Tab Pane 2
+      </TabItem>
+      <TabItem label="tab3">
+        Content of Tab Pane 3
+      </TabItem>
+    </Tabs>
+  </Story>
+</Canvas>
+
+## API
+
+通过设置 Tabs 和 TabItem 的属性来产生不同的标签页样式，推荐顺序为:
+
+Menu: defaultIndex -> onSelect -> mode。
+
+**Tabs 的属性说明如下：**
+
+<ArgsTable of={Tabs} />
+
+MenuItem: disabled。
+
+**TabItem 的属性说明如下：**
+
+<ArgsTable of={TabItem} />

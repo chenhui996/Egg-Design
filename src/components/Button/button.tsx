@@ -1,36 +1,28 @@
-import React from "react";
+import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 import classNames from "classnames";
 
-// export enum ButtonSize {
-//   Large = "lg",
-//   Small = "sm",
-// }
 export type ButtonSize = "lg" | "sm";
-
-// export enum ButtonType {
-//   Primary = "primary",
-//   Default = "default",
-//   Danger = "danger",
-//   Link = "link",
-// }
-export type ButtonType = "primary" | "default" | 'danger' | 'link';
+export type ButtonType = "primary" | "default" | "danger" | "link";
 
 interface BaseButtonProps {
+  /** 自定义class名称 */
   className?: string;
+  /** 设置 button 的禁用 */
   disabled?: boolean;
+  /** 设置 button 的尺寸 */
   size?: ButtonSize; // defind 3
+  /** 设置 button 的类型 */
   btnType?: ButtonType; // defind 8
   children: React.ReactNode;
+  /** 设置 button link 的链接 */
   href?: string;
 }
 
-type NativeButtonProps = BaseButtonProps &
-  React.ButtonHTMLAttributes<HTMLElement>;
-type AnchorButtonProps = BaseButtonProps &
-  React.AnchorHTMLAttributes<HTMLElement>;
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>;
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 
-const Button: React.FunctionComponent<ButtonProps> = (props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const {
     disabled,
     className,
@@ -67,6 +59,7 @@ const Button: React.FunctionComponent<ButtonProps> = (props) => {
 Button.defaultProps = {
   disabled: false,
   btnType: "default",
+  size: "sm",
 };
 
 export default Button;
