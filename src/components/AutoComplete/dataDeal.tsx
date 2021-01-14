@@ -1,3 +1,4 @@
+import React from 'react';
 import { DataSourceType } from "./autoComplete";
 
 interface LakerPlayerProps {
