@@ -1,6 +1,6 @@
 import "../src/styles/index.scss";
 import React from "react";
-import { addParameters, addDecorator } from "@storybook/react";
+import { addParameters, addDecorator, configure } from "@storybook/react";
 import { DocsPage, DocsContainer } from "@storybook/addon-docs/blocks";
 
 export const parameters = {
