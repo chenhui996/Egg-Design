@@ -34,3 +34,5 @@ import "eggdesign/dist/eggdesign.css";
 ```
 
 ### 持续迭代
+
+会持续添加新组件，完善 Egg-Design;
