@@ -4,7 +4,7 @@ eggd 是基于 Egg Design 设计体系的 React UI 组件库。
 
 [![Build Status](https://travis-ci.com/chenhui996/Egg-Design.svg?branch=main)](https://travis-ci.com/chenhui996/Egg-Design)
 
-## 特性 
+## 特性
 
 - 提炼自企业级中后台产品的交互语言和视觉风格。
 
@@ -20,6 +20,12 @@ eggd 是基于 Egg Design 设计体系的 React UI 组件库。
 
 ```
 $ npm install eggdesign --save
+```
+
+## 文档
+
+```
+https://chenhui996.github.io/Egg-Design
 ```
 
 ## 示例
