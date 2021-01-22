@@ -32,7 +32,7 @@ https://chenhui996.github.io/Egg-Design
 
 ```js
 import { Alert } from "egg-design";
-ReactDOM.render(<DatePicker />, mountNode);
+ReactDOM.render(<Alert title="title" />, mountNode);
 ```
 
 引入样式：
