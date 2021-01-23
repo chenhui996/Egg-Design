@@ -13,3 +13,4 @@ describe("test Input component", () => {
   it("should render different input sizes on size property", () => {});
   it("should render prepand and append element on prepand/append property", () => {});
 });
+
