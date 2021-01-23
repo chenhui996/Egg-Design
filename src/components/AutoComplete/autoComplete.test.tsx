@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactElement} from "react";
 import { config } from "react-transition-group";
 import {
   fireEvent,
@@ -6,7 +6,7 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
-import { AutoComplete, AutoCompleteProps } from "./autoComplete";
+import { AutoComplete, AutoCompleteProps, DataSourceType } from "./autoComplete";
 
 config.disabled = true;
 
