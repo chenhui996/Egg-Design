@@ -1,0 +1,116 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import { Select } from "./select.tsx";
+import { Option } from "./option.tsx";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+library.add(fas);
+
+<Meta title="组件总览/Select 选择器" component={Select} />
+
+# Select Component
+
+下拉选择器。
+
+## Input header
+
+```js
+import { Select } from "egg-design";
+// 然后可以使用 <Select> 和 <Select.Option>
+```
+
+## 默认 Select
+
+<Story name="默认 Select">
+  <Select
+    name="egg-select"
+    onChange={function noRefCheck() {}}
+    onVisibleChange={function noRefCheck() {}}
+    placeholder="请选择"
+  >
+    <Option value="egg-design" />
+    <Option value="egg-design2" />
+    <Option value="egg-design3" disabled />
+    <Option value="egg-design4" />
+  </Select>
+</Story>
+
+```ts
+<Select
+  name="egg-select"
+  onChange={function noRefCheck() {}}
+  onVisibleChange={function noRefCheck() {}}
+  placeholder="请选择"
+>
+  <Option value="egg-design" />
+  <Option value="egg-design2" />
+  <Option value="egg-design3" disabled />
+  <Option value="egg-design4" />
+</Select>
+```
+
+## 多选 Select
+
+<Story name="多选 Select">
+  <Select
+    multiple
+    name="egg-select"
+    onChange={function noRefCheck() {}}
+    onVisibleChange={function noRefCheck() {}}
+    placeholder="支持多选的select"
+  >
+    <Option value="egg-design" />
+    <Option value="egg-design2" />
+    <Option value="egg-design3" disabled />
+    <Option value="egg-design4" />
+  </Select>
+</Story>
+
+```ts
+<Select
+  multiple
+  name="egg-select"
+  onChange={function noRefCheck() {}}
+  onVisibleChange={function noRefCheck() {}}
+  placeholder="支持多选的select"
+>
+  <Option value="egg-design" />
+  <Option value="egg-design2" />
+  <Option value="egg-design3" disabled />
+  <Option value="egg-design4" />
+</Select>
+```
+
+## 禁用 Select
+
+<Story name="禁用 Select">
+  <Select disabled name="egg-select" placeholder="禁用的 Select">
+    <Option value="egg-design" />
+    <Option value="egg-design2" />
+    <Option value="egg-design3" disabled />
+    <Option value="egg-design4" />
+  </Select>
+</Story>
+
+```ts
+<Select disabled name="egg-select" placeholder="禁用的 Select">
+  <Option value="egg-design" />
+  <Option value="egg-design2" />
+  <Option value="egg-design3" disabled />
+  <Option value="egg-design4" />
+</Select>
+```
+
+## API
+
+设置 Select 的属性，推荐顺序为：defaultValue -> name -> placeholder -> disabled -> multiple -> onChange -> onVisibleChange。
+
+**Select 的属性说明如下：**
+
+<ArgsTable of={Select} />
+
+设置 Select.Option 的属性，推荐顺序为：value -> label -> disabled。
+
+**Select.Option 的属性说明如下：**
+
+<ArgsTable of={Option} />

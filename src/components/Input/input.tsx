@@ -1,4 +1,9 @@
-import React, { ChangeEvent, InputHTMLAttributes, ReactElement } from "react";
+import React, {
+  ChangeEvent,
+  InputHTMLAttributes,
+  ReactElement,
+  forwardRef,
+} from "react";
 import classNames from "classnames";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import Icon from "../Icon/icon";
@@ -19,7 +24,7 @@ export interface InputProps
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input: React.FunctionComponent<InputProps> = (props) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { disabled, size, icon, prepend, append, style, ...restProps } = props;
   // classnames
   const inputGlobalClass = "egg-input";
@@ -52,6 +57,7 @@ export const Input: React.FunctionComponent<InputProps> = (props) => {
         </div>
       )}
       <input
+        ref={ref}
         className={`${inputGlobalClass}-inner`}
         disabled={disabled}
         {...restProps}
@@ -61,11 +67,10 @@ export const Input: React.FunctionComponent<InputProps> = (props) => {
       )}
     </div>
   );
-};
+});
 
 Input.defaultProps = {
   disabled: false,
-  size: "sm",
 };
 
 export default Input;

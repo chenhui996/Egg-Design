@@ -1,4 +1,4 @@
-@mixin button-size($padding-x, $padding-y, $font-size, $border-raduis) {
+@mixin button-size($padding-y, $padding-x, $font-size, $border-raduis) {
   padding: $padding-y $padding-x;
   font-size: $font-size;
   border-radius: $border-raduis;
@@ -10,42 +10,34 @@
   $color,
   $hover-background: lighten($background, 7.5%),
   $hover-border: lighten($border, 10%),
-  $hover-color: $color
+  $hover-color: $color,
 ) {
   color: $color;
   background: $background;
   border-color: $border;
-  // :hover
   &:hover {
     color: $hover-color;
     background: $hover-background;
-    border-color: $hover-border;
+    border-color: $hover-border;    
   }
-  // :focus .focus
   &:focus,
   &.focus {
     color: $hover-color;
     background: $hover-background;
-    border-color: $hover-border;
+    border-color: $hover-border;    
   }
-  // :disabled .disabled
   &:disabled,
   &.disabled {
     color: $color;
     background: $background;
-    border-color: $border;
+    border-color: $border;    
   }
 }
 
-//alert
-@mixin alert-style(
-  $border-color,
-  $border-type,
-  $border-width,
-  $background-color: rgba($border-color, 0.1)
-) {
-  background-color: $background-color;
-  border:$border-width  $border-type rgba($border-color, 0.3);
+@mixin alert-style($background, $border, $color) {
+  color: $color;
+  background: $background;
+  border-color: $border;
 }
 
 @mixin zoom-animation(
@@ -75,11 +67,6 @@
   }
 }
 
-@mixin border-top-radius($raduis){
-  border-top-left-radius: $raduis;
-  border-top-right-radius: $raduis;
-}
-
 @mixin border-right-radius($raduis) {
   border-top-right-radius: $raduis;
   border-bottom-right-radius: $raduis;
@@ -88,4 +75,9 @@
 @mixin border-left-radius($raduis) {
   border-top-left-radius: $raduis;
   border-bottom-left-radius: $raduis;
+}
+
+@mixin border-top-radius($raduis) {
+  border-top-left-radius: $raduis;
+  border-top-right-radius: $raduis;
 }
