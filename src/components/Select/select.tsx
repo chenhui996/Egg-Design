@@ -1,16 +1,17 @@
 import React, {
-  createContext,
   FC,
   FunctionComponentElement,
   useState,
+  createContext,
   useRef,
   useEffect,
 } from "react";
+
 import classNames from "classnames";
 import Input from "../Input";
 import Icon from "../Icon";
 import useClickOutside from "../../hooks/useClickOutside";
-import Transition from "../Transition/transition";
+import Transition from "../Transition";
 import { SelectOptionProps } from "./option";
 
 export interface SelectProps {
@@ -27,15 +28,16 @@ export interface SelectProps {
   /** 选中值发生变化时触发 */
   onChange?: (selectedValue: string, selectedValues: string[]) => void;
   /** 下拉框出现/隐藏时触发 */
-  onVisibleChange?: (visible: boolean) => void;
+  onVisibleChange?: (visible: boolean) => boolean;
 }
 
-export interface ISelectContext {
+export interface ISelectContent {
   onSelect?: (value: string, isSelected?: boolean) => void;
   selectedValues: string[];
   multiple?: boolean;
 }
-export const SelectContext = createContext<ISelectContext>({
+
+export const SelectContext = createContext<ISelectContent>({
   selectedValues: [],
 });
 
@@ -43,13 +45,14 @@ export const Select: FC<SelectProps> = (props) => {
   const {
     defaultValue,
     placeholder,
-    children,
+    disabled,
     multiple,
     name,
-    disabled,
     onChange,
     onVisibleChange,
+    children,
   } = props;
+
   const selectGlobal = "egg-select";
   const input = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLInputElement>(null);
@@ -58,6 +61,7 @@ export const Select: FC<SelectProps> = (props) => {
   const [selectedValues, setSelectedValues] = useState<string[]>(
     Array.isArray(defaultValue) ? defaultValue : []
   );
+
   const [value, setValue] = useState(
     typeof defaultValue === "string" ? defaultValue : ""
   );
@@ -75,6 +79,7 @@ export const Select: FC<SelectProps> = (props) => {
     let updatedValue = [value];
     // click again to remove selected when is multiple mode
     if (multiple) {
+      // 更新updatedValue
       updatedValue = isSelected
         ? selectedValues.filter((v) => v !== value)
         : [...selectedValues, value];
@@ -108,9 +113,9 @@ export const Select: FC<SelectProps> = (props) => {
       onVisibleChange(false);
     }
   });
-  const passedContext: ISelectContext = {
+  const passedContext: ISelectContent = {
     onSelect: handleOptionClick,
-    selectedValues: selectedValues,
+    selectedValues: selectedValues, 
     multiple: multiple,
   };
   const handleClick = (e: React.MouseEvent) => {
@@ -122,6 +127,7 @@ export const Select: FC<SelectProps> = (props) => {
       }
     }
   };
+  // 下拉框内容
   const generateOptions = () => {
     return React.Children.map(children, (child, i) => {
       const childElement = child as FunctionComponentElement<SelectOptionProps>;
