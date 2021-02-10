@@ -20,10 +20,10 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-import React from "react";
+import React, { forwardRef, } from "react";
 import classNames from "classnames";
 import Icon from "../Icon/icon";
-export var Input = function (props) {
+export var Input = forwardRef(function (props, ref) {
     var _a;
     var disabled = props.disabled, size = props.size, icon = props.icon, prepend = props.prepend, append = props.append, style = props.style, restProps = __rest(props, ["disabled", "size", "icon", "prepend", "append", "style"]);
     // classnames
@@ -49,11 +49,10 @@ export var Input = function (props) {
         prepend && (React.createElement("div", { className: inputGlobalClass + "-group-prepend" }, prepend)),
         icon && (React.createElement("div", { className: "icon-wrapper" },
             React.createElement(Icon, { icon: icon, title: "title-" + icon }))),
-        React.createElement("input", __assign({ className: inputGlobalClass + "-inner", disabled: disabled }, restProps)),
+        React.createElement("input", __assign({ ref: ref, className: inputGlobalClass + "-inner", disabled: disabled }, restProps)),
         append && (React.createElement("div", { className: inputGlobalClass + "-group-append" }, append))));
-};
+});
 Input.defaultProps = {
     disabled: false,
-    size: "sm",
 };
 export default Input;

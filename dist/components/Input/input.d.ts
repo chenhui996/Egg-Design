@@ -14,5 +14,5 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, "size
     append?: string | ReactElement;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
-export declare const Input: React.FunctionComponent<InputProps>;
+export declare const Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>>;
 export default Input;

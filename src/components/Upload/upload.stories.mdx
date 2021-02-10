@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import { Upload } from "./upload";
+
+<Meta title="组件总览/Upload 组件上传" component={Upload} />
+
+# Upload Component
+
+组件上传组件。
+
+## Upload header
+
+```js
+import { Upload } from "egg-design";
+```
+
+## 默认 Upload
+
+<Canvas>
+  <Story name="Upload">
+    <Upload
+      action="https://jsonplaceholder.typicode.com/posts"
+      onProgress={action("progress")}
+      onSuccess={action("success")}
+      onError={action("error")}
+    />
+  </Story>
+</Canvas>
