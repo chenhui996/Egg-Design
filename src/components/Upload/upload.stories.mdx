@@ -2,14 +2,14 @@ import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { action } from "@storybook/addon-actions";
 import { Upload } from "./upload";
 import { checkFileSize, filePromise, defaultFileList } from "./data";
-import Button from '../Button';
-import Icon from '../Icon/icon';
+import Button from "../Button";
+import Icon from "../Icon/icon";
 
 <Meta title="组件总览/Upload 组件上传" component={Upload} />
 
 # Upload Component
 
-组件上传组件。
+文件上传组件。
 
 ## Upload header
 
@@ -23,16 +23,76 @@ import { Upload } from "egg-design";
   <Story name="Upload">
     <Upload
       action="https://jsonplaceholder.typicode.com/posts"
-      onChange={action("change")}
-      onRemove={action("removed")}
-      name="fileName"
-      data={{ key: "value" }}
-      headers={{ "X-Powered-By": "eggdesign" }}
-      accept=".png"
+      name="file"
+      onChange={function noRefCheck() {}}
+      onProgress={function noRefCheck() {}}
+      onRemove={function noRefCheck() {}}
+      onSuccess={function noRefCheck() {}}
+    >
+      <Button btnType="primary">点击上传</Button>
+    </Upload>
+  </Story>
+</Canvas>
+
+## 默认 Upload
+
+<Canvas>
+  <Story name="多选 Upload">
+    <Upload
+      action="https://jsonplaceholder.typicode.com/posts"
+      name="file2"
+      onChange={function noRefCheck() {}}
+      onProgress={function noRefCheck() {}}
+      onRemove={function noRefCheck() {}}
+      onSuccess={function noRefCheck() {}}
       multiple
     >
-      <Button btnType="primary">Upload File</Button>
+      <Button btnType="primary">多选上传文件</Button>
     </Upload>
+  </Story>
+</Canvas>
+
+## 上传前检查文件大小
+
+<Canvas>
+  <Story name="上传前-检查文件大小">
+    <Upload
+      action="https://jsonplaceholder.typicode.com/posts"
+      onChange={action("change")}
+      beforeUpload={checkFileSize}
+      multiple
+    >
+      <Button btnType="primary">不能传大于30Kb！</Button>
+    </Upload>
+  </Story>
+</Canvas>
+
+### 数据源
+
+```ts
+// 数据源
+const checkFileSize = (file: File) => {
+  if (Math.round(file.size / 1024) > 50) {
+    alert("file too big");
+    return false;
+  }
+  return true;
+};
+
+<Upload
+  action="https://jsonplaceholder.typicode.com/posts"
+  onChange={action("change")}
+  beforeUpload={checkFileSize}
+  multiple
+>
+  <Button btnType="primary">不能传大于30Kb！</Button>
+</Upload>;
+```
+
+## 拖动上传
+
+<Canvas>
+  <Story name="拖动上传">
     <Upload
       action="https://jsonplaceholder.typicode.com/posts"
       onChange={action("change")}
